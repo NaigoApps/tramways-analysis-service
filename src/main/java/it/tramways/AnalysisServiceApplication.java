@@ -1,4 +1,4 @@
-package it.tramways.analysis;
+package it.tramways;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
