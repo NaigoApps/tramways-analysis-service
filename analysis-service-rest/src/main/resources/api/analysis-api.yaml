@@ -1,0 +1,301 @@
+openapi: 3.0.3
+info:
+  title: Tramways Analysis API
+  description: Tramways Analysis API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8762/tramways/rest/
+paths:
+  /analysis/{projectId}/{mapId}:
+    get:
+      summary: 'Gets project map analysis'
+      operationId: 'getAnalysis'
+      tags: [ 'analysis' ]
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: mapId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnalysisDescription'
+  /analysis/{projectId}/{mapId}/{analysisId}:
+    get:
+      summary: 'Gets an analysis'
+      operationId: 'getAnalysis'
+      tags: [ 'analysis' ]
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: mapId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: analysisId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analysis'
+    delete:
+      summary: 'Deletes an analysis'
+      operationId: 'deleteAnalysis'
+      tags: [ 'analysis' ]
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: mapId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: analysisId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Ok'
+  /analysis/available:
+    get:
+      summary: 'Gets available analysis'
+      operationId: 'getAvailableAnalysis'
+      tags: [ 'analysis' ]
+      parameters:
+        - in: query
+          name: projectId
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: mapId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnalysisType'
+  /analysis/launch:
+    post:
+      summary: 'Launch selected analysis'
+      operationId: 'launchAnalysis'
+      tags: [ 'analysis' ]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalysisRequest'
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalysisResponse'
+components:
+  schemas:
+    AnalysisType:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Analysis:
+      type: object
+      properties:
+        name:
+          type: string
+        status:
+          $ref: '#/components/schemas/AnalysisStatus'
+        result:
+          $ref: '#/components/schemas/AnalysisResult'
+    AnalysisDescription:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        status:
+          $ref: '#/components/schemas/AnalysisStatus'
+    AnalysisStatus:
+      type: string
+      enum: [ IN_PROGRESS, DONE, ERROR ]
+    AnalysisResult:
+      type: object
+    XYAnalysisResult:
+      allOf:
+        - $ref: '#/components/schemas/AnalysisResult'
+        - type: object
+          properties:
+            xLabel:
+              type: string
+            yLabel:
+              type: string
+            points:
+              type: array
+              items:
+                $ref: '#/components/schemas/XYPoint'
+    XYPoint:
+      type: object
+      properties:
+        x:
+          type: number
+        y:
+          type: number
+    StringAnalysisResult:
+      allOf:
+        - $ref: '#/components/schemas/AnalysisResult'
+        - type: object
+          properties:
+            message:
+              type: string
+    AnalysisRequest:
+      type: object
+      properties:
+        projectId:
+          type: string
+        mapId:
+          type: string
+        analysisTypeId:
+          type: string
+        parameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Property'
+    AnalysisResponse:
+      type: object
+      properties:
+        warnings:
+          type: array
+          items:
+            type: string
+        parameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Property'
+        ok:
+          type: boolean
+    Property:
+      type: object
+      discriminator:
+        propertyName: propertyType
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        propertyType:
+          type: string
+        valid:
+          type: boolean
+      required: [ propertyType ]
+    IntegerProperty:
+      allOf:
+        - $ref: '#/components/schemas/Property'
+        - type: object
+          properties:
+            value:
+              type: integer
+    StringProperty:
+      allOf:
+        - $ref: '#/components/schemas/Property'
+        - type: object
+          properties:
+            value:
+              type: string
+    ChoiceProperty:
+      allOf:
+        - $ref: '#/components/schemas/Property'
+        - type: object
+          properties:
+            choices:
+              type: array
+              items:
+                $ref: '#/components/schemas/ChoiceElement'
+            value:
+              type: string
+    ChoiceElement:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+    DecimalProperty:
+      allOf:
+        - $ref: '#/components/schemas/Property'
+        - type: object
+          properties:
+            value:
+              type: number
+    DistributionProperty:
+      allOf:
+        - $ref: '#/components/schemas/Property'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Distribution'
+    Distribution:
+      type: object
+      discriminator:
+        propertyName: distributionType
+        mapping:
+          UNIFORM: '#/components/schemas/UniformDistribution'
+          EXPONENTIAL: '#/components/schemas/ExponentialDistribution'
+      properties:
+        distributionType:
+          $ref: '#/components/schemas/DistributionType'
+      required: [ distributionType ]
+    DistributionType:
+      type: string
+      enum: [ UNIFORM, EXPONENTIAL ]
+    UniformDistribution:
+      allOf:
+        - $ref: '#/components/schemas/Distribution'
+        - type: object
+          properties:
+            left:
+              type: number
+            right:
+              type: number
+    ExponentialDistribution:
+      allOf:
+        - $ref: '#/components/schemas/Distribution'
+        - type: object
+          properties:
+            lambda:
+              type: number
