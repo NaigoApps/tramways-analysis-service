@@ -21,7 +21,7 @@
             <goals>
               <goal>generate</goal>
             </goals>
-            <id>projects-api</id>
+            <id>analysis-api</id>
           </execution>
         </executions>
         <groupId>org.openapitools</groupId>
@@ -35,7 +35,24 @@
       <groupId>it.tramways</groupId>
       <version>1.0.0-SNAPSHOT</version>
     </dependency>
+
+    <dependency>
+      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+      <groupId>org.springframework.cloud</groupId>
+    </dependency>
   </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <groupId>org.springframework.cloud</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${spring-cloud.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <groupId>it.tramways</groupId>
 
   <modelVersion>4.0.0</modelVersion>
@@ -62,6 +79,7 @@
     </openapi.generator.maven.plugin.generateModelTests>
     <openapi.generator.maven.plugin.supportingFilesToGenerate>ApiUtil.java
     </openapi.generator.maven.plugin.supportingFilesToGenerate>
+    <spring-cloud.version>Hoxton.SR7</spring-cloud.version>
   </properties>
 
   <version>1.0-SNAPSHOT</version>

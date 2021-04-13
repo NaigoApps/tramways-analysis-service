@@ -9,7 +9,7 @@ paths:
   /analysis/{projectId}/{mapId}:
     get:
       summary: 'Gets project map analysis'
-      operationId: 'getAnalysis'
+      operationId: 'getMapAnalysis'
       tags: [ 'analysis' ]
       parameters:
         - in: path
