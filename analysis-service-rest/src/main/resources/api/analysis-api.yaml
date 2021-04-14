@@ -304,3 +304,6 @@ components:
           properties:
             lambda:
               type: number
+security:
+  - bearerAuth: [ ]
+
