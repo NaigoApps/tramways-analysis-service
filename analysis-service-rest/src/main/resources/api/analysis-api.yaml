@@ -4,7 +4,7 @@ info:
   description: Tramways Analysis API
   version: 1.0.0
 servers:
-  - url: http://localhost:8762/tramways/rest/
+  - url: http://localhost:8762/tramways/rest
 paths:
   /analysis/{projectId}/{mapId}:
     get:
@@ -125,6 +125,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/AnalysisResponse'
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     AnalysisType:
       type: object
