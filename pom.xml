@@ -8,7 +8,8 @@
   <modelVersion>4.0.0</modelVersion>
   <modules>
     <module>analysis-service-application</module>
-    <module>analysis-service-rest</module>
+    <module>analysis-service-inbound-rest</module>
+    <module>analysis-service-outbound-mongo</module>
   </modules>
 
   <name>analysis-service</name>

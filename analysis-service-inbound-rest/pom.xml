@@ -2,7 +2,9 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>analysis-service-rest</artifactId>
+
+  <artifactId>analysis-service-inbound-rest</artifactId>
+
   <build>
     <plugins>
       <plugin>
@@ -13,8 +15,20 @@
               <apiPackage>it.tramways.analysis.api</apiPackage>
               <configOptions>
                 <interfaceOnly>true</interfaceOnly>
+                <skipDefaultInterface>true</skipDefaultInterface>
               </configOptions>
+              <generateApiDocumentation>false</generateApiDocumentation>
+              <generateApiTests>false</generateApiTests>
+              <generateModelDocumentation>false</generateModelDocumentation>
+              <generateModelTests>false</generateModelTests>
+              <generateSupportingFiles>false</generateSupportingFiles>
               <generatorName>spring</generatorName>
+              <importMappings>
+                <importMapping>Property=it.tramways.commons.properties.model.Property
+                </importMapping>
+                <importMapping>AnalysisResult=it.tramways.commons.analysis.model.AnalysisResult
+                </importMapping>
+              </importMappings>
               <inputSpec>${project.basedir}/src/main/resources/api/analysis-api.yaml</inputSpec>
               <modelPackage>it.tramways.analysis.api.model</modelPackage>
             </configuration>
@@ -31,14 +45,27 @@
   </build>
   <dependencies>
     <dependency>
-      <artifactId>tramways-commons-web</artifactId>
+      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+      <groupId>org.springframework.cloud</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-data-rest</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>tramways-commons-rest</artifactId>
       <groupId>it.tramways</groupId>
       <version>1.0.0-SNAPSHOT</version>
     </dependency>
-
     <dependency>
-      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-      <groupId>org.springframework.cloud</groupId>
+      <artifactId>tramways-commons-properties-model</artifactId>
+      <groupId>it.tramways</groupId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <artifactId>tramways-commons-analysis-model</artifactId>
+      <groupId>it.tramways</groupId>
+      <version>1.0.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
 
@@ -65,23 +92,11 @@
   </parent>
 
   <properties>
-    <codegen.skipIfSpecIsUnchanged>false</codegen.skipIfSpecIsUnchanged>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
-    <openapi.generator.maven.plugin.generateApiDocumentation>false
-    </openapi.generator.maven.plugin.generateApiDocumentation>
-    <openapi.generator.maven.plugin.generateApiTests>false
-    </openapi.generator.maven.plugin.generateApiTests>
-    <openapi.generator.maven.plugin.generateApis>true</openapi.generator.maven.plugin.generateApis>
-    <openapi.generator.maven.plugin.generateModelDocumentation>false
-    </openapi.generator.maven.plugin.generateModelDocumentation>
-    <openapi.generator.maven.plugin.generateModelTests>false
-    </openapi.generator.maven.plugin.generateModelTests>
-    <openapi.generator.maven.plugin.supportingFilesToGenerate>ApiUtil.java
-    </openapi.generator.maven.plugin.supportingFilesToGenerate>
     <spring-cloud.version>Hoxton.SR7</spring-cloud.version>
   </properties>
 
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
 
 </project>
