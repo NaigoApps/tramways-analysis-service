@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Tramways Analysis API
   description: Tramways Analysis API
-  version: 1.0.0
+  version: 1.0.0-SNAPSHOT
 servers:
   - url: http://localhost:8762/tramways/rest
 paths:
@@ -141,6 +141,10 @@ components:
     Analysis:
       type: object
       properties:
+        uuid:
+          type: string
+        projectUuid:
+          type: string
         name:
           type: string
         status:
@@ -159,8 +163,6 @@ components:
     AnalysisStatus:
       type: string
       enum: [ IN_PROGRESS, DONE, ERROR ]
-    AnalysisResult:
-      type: object
     AnalysisRequest:
       type: object
       properties:
@@ -189,6 +191,42 @@ components:
           type: boolean
     Property:
       type: object
+    AnalysisResult:
+      type: object
+      properties:
+        uuid:
+          type: string
+        resultType:
+          type: string
+      discriminator:
+        propertyName: 'resultType'
+    StringAnalysisResult:
+      allOf:
+        - $ref: '#/components/schemas/AnalysisResult'
+        - type: object
+          properties:
+            message:
+              type: string
+    XYAnalysisResult:
+      allOf:
+        - $ref: '#/components/schemas/AnalysisResult'
+        - type: object
+          properties:
+            xLabel:
+              type: string
+            yLabel:
+              type: string
+            points:
+              type: array
+              items:
+                $ref: '#/components/schemas/XYPoint'
+    XYPoint:
+      type: object
+      properties:
+        x:
+          type: number
+        y:
+          type: number
 security:
   - bearerAuth: [ ]
 

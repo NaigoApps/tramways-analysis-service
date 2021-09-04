@@ -1,102 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <artifactId>analysis-service-inbound-rest</artifactId>
+    <artifactId>analysis-service-inbound-rest</artifactId>
 
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>openapi-generator-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <configuration>
-              <apiPackage>it.tramways.analysis.api</apiPackage>
-              <configOptions>
-                <interfaceOnly>true</interfaceOnly>
-                <skipDefaultInterface>true</skipDefaultInterface>
-              </configOptions>
-              <generateApiDocumentation>false</generateApiDocumentation>
-              <generateApiTests>false</generateApiTests>
-              <generateModelDocumentation>false</generateModelDocumentation>
-              <generateModelTests>false</generateModelTests>
-              <generateSupportingFiles>false</generateSupportingFiles>
-              <generatorName>spring</generatorName>
-              <importMappings>
-                <importMapping>Property=it.tramways.commons.properties.model.Property
-                </importMapping>
-                <importMapping>AnalysisResult=it.tramways.commons.analysis.model.AnalysisResult
-                </importMapping>
-              </importMappings>
-              <inputSpec>${project.basedir}/src/main/resources/api/analysis-api.yaml</inputSpec>
-              <modelPackage>it.tramways.analysis.api.model</modelPackage>
-            </configuration>
-            <goals>
-              <goal>generate</goal>
-            </goals>
-            <id>analysis-api</id>
-          </execution>
-        </executions>
-        <groupId>org.openapitools</groupId>
-        <version>5.0.0</version>
-      </plugin>
-    </plugins>
-  </build>
-  <dependencies>
-    <dependency>
-      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-      <groupId>org.springframework.cloud</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>spring-boot-starter-data-rest</artifactId>
-      <groupId>org.springframework.boot</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>tramways-commons-rest</artifactId>
-      <groupId>it.tramways</groupId>
-      <version>1.0.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <artifactId>tramways-commons-properties-model</artifactId>
-      <groupId>it.tramways</groupId>
-      <version>1.0.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <artifactId>tramways-commons-analysis-model</artifactId>
-      <groupId>it.tramways</groupId>
-      <version>1.0.0-SNAPSHOT</version>
-    </dependency>
-  </dependencies>
-
-  <dependencyManagement>
     <dependencies>
-      <dependency>
-        <artifactId>spring-cloud-dependencies</artifactId>
-        <groupId>org.springframework.cloud</groupId>
-        <scope>import</scope>
-        <type>pom</type>
-        <version>${spring-cloud.version}</version>
-      </dependency>
+        <dependency>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+        </dependency>
+        <dependency>
+            <artifactId>spring-boot-starter-data-rest</artifactId>
+            <groupId>org.springframework.boot</groupId>
+        </dependency>
+        <dependency>
+            <artifactId>tramways-commons-rest</artifactId>
+            <groupId>it.tramways</groupId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <artifactId>tramways-commons-properties-model</artifactId>
+            <groupId>it.tramways</groupId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <artifactId>tramways-commons-analysis-model</artifactId>
+            <groupId>it.tramways</groupId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>it.tramways</groupId>
+            <artifactId>analysis-service-server-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
-  </dependencyManagement>
-  <groupId>it.tramways</groupId>
 
-  <modelVersion>4.0.0</modelVersion>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <groupId>org.springframework.cloud</groupId>
+                <scope>import</scope>
+                <type>pom</type>
+                <version>${spring-cloud.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <groupId>it.tramways</groupId>
 
-  <parent>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <groupId>org.springframework.boot</groupId>
-    <relativePath/>
-    <version>2.3.3.RELEASE</version>
-  </parent>
+    <modelVersion>4.0.0</modelVersion>
 
-  <properties>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
-    <spring-cloud.version>Hoxton.SR7</spring-cloud.version>
-  </properties>
+    <parent>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <relativePath/>
+        <version>2.3.3.RELEASE</version>
+    </parent>
 
-  <version>1.0.0-SNAPSHOT</version>
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <spring-cloud.version>Hoxton.SR7</spring-cloud.version>
+    </properties>
+
+    <version>1.0.0-SNAPSHOT</version>
 
 </project>

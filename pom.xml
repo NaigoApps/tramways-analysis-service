@@ -1,25 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>analysis-service</artifactId>
-  <description>Demo project for Spring Boot</description>
-  <groupId>it.tramways</groupId>
-  <modelVersion>4.0.0</modelVersion>
-  <modules>
-    <module>analysis-service-application</module>
-    <module>analysis-service-inbound-rest</module>
-    <module>analysis-service-outbound-mongo</module>
-  </modules>
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <artifactId>analysis-service</artifactId>
+    <description>Demo project for Spring Boot</description>
+    <groupId>it.tramways</groupId>
+    <modelVersion>4.0.0</modelVersion>
+    <modules>
+        <module>analysis-service-application</module>
+        <module>analysis-service-inbound-rest</module>
+        <module>analysis-service-outbound-mongo</module>
+        <module>analysis-service-commons-kafka</module>
+        <module>analysis-service-outbound-kafka</module>
+        <module>analysis-service-inbound-kafka</module>
+        <module>rest-api/v1/generated/java</module>
+        <module>rest-api/v1/generated/spring</module>
+        <module>analysis-service-commons-core</module>
+        <module>analysis-service-outbound-api</module>
+    </modules>
 
-  <name>analysis-service</name>
+    <name>analysis-service</name>
 
-  <packaging>pom</packaging>
+    <packaging>pom</packaging>
 
-  <properties>
-    <java.version>11</java.version>
-  </properties>
+    <properties>
+        <java.version>11</java.version>
+    </properties>
 
-  <version>1.0.0-SNAPSHOT</version>
+
+    <profiles>
+        <profile>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <configuration>
+                            <nodeVersion>v14.16.1</nodeVersion>
+                            <workingDirectory>rest-api/v1/generated/javascript</workingDirectory>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>install-node-and-npm</goal>
+                                </goals>
+                                <id>install node</id>
+                                <phase>generate-resources</phase>
+                            </execution>
+                            <execution>
+                                <configuration>
+                                    <arguments>install</arguments>
+                                </configuration>
+                                <goals>
+                                    <goal>npm</goal>
+                                </goals>
+                                <id>npm install</id>
+                                <phase>generate-resources</phase>
+                            </execution>
+                            <execution>
+                                <configuration>
+                                    <arguments>publish --access public</arguments>
+                                </configuration>
+                                <goals>
+                                    <goal>npm</goal>
+                                </goals>
+                                <id>npm publish</id>
+                                <phase>generate-resources</phase>
+                            </execution>
+                        </executions>
+                        <groupId>com.github.eirslett</groupId>
+                        <version>1.11.3</version>
+                    </plugin>
+                </plugins>
+            </build>
+            <id>release</id>
+        </profile>
+    </profiles>
+
+    <version>1.0.0-SNAPSHOT</version>
 
 </project>
