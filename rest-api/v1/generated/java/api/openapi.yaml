@@ -1,0 +1,301 @@
+openapi: 3.0.3
+info:
+  description: Tramways Analysis API
+  title: Tramways Analysis API
+  version: 1.0.0-SNAPSHOT
+servers:
+- url: http://localhost:8762/tramways/rest
+security:
+- bearerAuth: []
+paths:
+  /analysis/{projectId}/{mapId}:
+    get:
+      operationId: getMapAnalysis
+      parameters:
+      - explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: mapId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AnalysisDescription'
+                type: array
+          description: Ok
+      summary: Gets project map analysis
+      tags:
+      - analysis
+      x-accepts: application/json
+  /analysis/{projectId}/{mapId}/{analysisId}:
+    delete:
+      operationId: deleteAnalysis
+      parameters:
+      - explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: mapId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: analysisId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Ok
+      summary: Deletes an analysis
+      tags:
+      - analysis
+      x-accepts: application/json
+    get:
+      operationId: getAnalysis
+      parameters:
+      - explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: mapId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: analysisId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analysis'
+          description: Ok
+      summary: Gets an analysis
+      tags:
+      - analysis
+      x-accepts: application/json
+  /analysis/available:
+    get:
+      operationId: getAvailableAnalysis
+      parameters:
+      - explode: true
+        in: query
+        name: projectId
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: mapId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AnalysisType'
+                type: array
+          description: Ok
+      summary: Gets available analysis
+      tags:
+      - analysis
+      x-accepts: application/json
+  /analysis/launch:
+    post:
+      operationId: launchAnalysis
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalysisRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalysisResponse'
+          description: Ok
+      summary: Launch selected analysis
+      tags:
+      - analysis
+      x-contentType: application/json
+      x-accepts: application/json
+components:
+  schemas:
+    AnalysisType:
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      type: object
+    Analysis:
+      example:
+        result:
+          uuid: uuid
+          resultType: resultType
+        name: name
+        uuid: uuid
+        projectUuid: projectUuid
+      properties:
+        uuid:
+          type: string
+        projectUuid:
+          type: string
+        name:
+          type: string
+        status:
+          $ref: '#/components/schemas/AnalysisStatus'
+        result:
+          $ref: '#/components/schemas/AnalysisResult'
+      type: object
+    AnalysisDescription:
+      example:
+        name: name
+        uuid: uuid
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        status:
+          $ref: '#/components/schemas/AnalysisStatus'
+      type: object
+    AnalysisStatus:
+      enum:
+      - IN_PROGRESS
+      - DONE
+      - ERROR
+      type: string
+    AnalysisRequest:
+      example:
+        analysisTypeId: analysisTypeId
+        mapId: mapId
+        projectId: projectId
+        parameters:
+        - null
+        - null
+      properties:
+        projectId:
+          type: string
+        mapId:
+          type: string
+        analysisTypeId:
+          type: string
+        parameters:
+          items:
+            $ref: '#/components/schemas/Property'
+          type: array
+      type: object
+    AnalysisResponse:
+      example:
+        warnings:
+        - warnings
+        - warnings
+        ok: true
+        parameters:
+        - null
+        - null
+      properties:
+        warnings:
+          items:
+            type: string
+          type: array
+        parameters:
+          items:
+            $ref: '#/components/schemas/Property'
+          type: array
+        ok:
+          type: boolean
+      type: object
+    Property:
+      type: object
+    AnalysisResult:
+      discriminator:
+        propertyName: resultType
+      example:
+        uuid: uuid
+        resultType: resultType
+      properties:
+        uuid:
+          type: string
+        resultType:
+          type: string
+      type: object
+    StringAnalysisResult:
+      allOf:
+      - $ref: '#/components/schemas/AnalysisResult'
+      - $ref: '#/components/schemas/StringAnalysisResult_allOf'
+    XYAnalysisResult:
+      allOf:
+      - $ref: '#/components/schemas/AnalysisResult'
+      - $ref: '#/components/schemas/XYAnalysisResult_allOf'
+    XYPoint:
+      properties:
+        x:
+          type: number
+        y:
+          type: number
+      type: object
+    StringAnalysisResult_allOf:
+      properties:
+        message:
+          type: string
+      type: object
+    XYAnalysisResult_allOf:
+      properties:
+        xLabel:
+          type: string
+        yLabel:
+          type: string
+        points:
+          items:
+            $ref: '#/components/schemas/XYPoint'
+          type: array
+      type: object
+  securitySchemes:
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+

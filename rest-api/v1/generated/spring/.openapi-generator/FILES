@@ -1,0 +1,17 @@
+.openapi-generator-ignore
+README.md
+pom.xml
+src/main/java/it/tramways/analysis/api/v1/AnalysisApi.java
+src/main/java/it/tramways/analysis/api/v1/ApiUtil.java
+src/main/java/it/tramways/analysis/api/v1/model/Analysis.java
+src/main/java/it/tramways/analysis/api/v1/model/AnalysisDescription.java
+src/main/java/it/tramways/analysis/api/v1/model/AnalysisRequest.java
+src/main/java/it/tramways/analysis/api/v1/model/AnalysisResponse.java
+src/main/java/it/tramways/analysis/api/v1/model/AnalysisResult.java
+src/main/java/it/tramways/analysis/api/v1/model/AnalysisStatus.java
+src/main/java/it/tramways/analysis/api/v1/model/AnalysisType.java
+src/main/java/it/tramways/analysis/api/v1/model/StringAnalysisResult.java
+src/main/java/it/tramways/analysis/api/v1/model/StringAnalysisResultAllOf.java
+src/main/java/it/tramways/analysis/api/v1/model/XYAnalysisResult.java
+src/main/java/it/tramways/analysis/api/v1/model/XYAnalysisResultAllOf.java
+src/main/java/it/tramways/analysis/api/v1/model/XYPoint.java
