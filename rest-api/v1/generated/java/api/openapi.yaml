@@ -213,8 +213,14 @@ components:
         mapId: mapId
         projectId: projectId
         parameters:
-        - null
-        - null
+        - valid: true
+          propertyType: propertyType
+          name: name
+          description: description
+        - valid: true
+          propertyType: propertyType
+          name: name
+          description: description
       properties:
         projectId:
           type: string
@@ -234,8 +240,14 @@ components:
         - warnings
         ok: true
         parameters:
-        - null
-        - null
+        - valid: true
+          propertyType: propertyType
+          name: name
+          description: description
+        - valid: true
+          propertyType: propertyType
+          name: name
+          description: description
       properties:
         warnings:
           items:
@@ -247,8 +259,6 @@ components:
           type: array
         ok:
           type: boolean
-      type: object
-    Property:
       type: object
     AnalysisResult:
       discriminator:
@@ -277,6 +287,73 @@ components:
         y:
           type: number
       type: object
+    Property:
+      discriminator:
+        propertyName: propertyType
+      example:
+        valid: true
+        propertyType: propertyType
+        name: name
+        description: description
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        propertyType:
+          type: string
+        valid:
+          type: boolean
+      required:
+      - propertyType
+      type: object
+    IntegerProperty:
+      allOf:
+      - $ref: '#/components/schemas/Property'
+      - $ref: '#/components/schemas/IntegerProperty_allOf'
+    StringProperty:
+      allOf:
+      - $ref: '#/components/schemas/Property'
+      - $ref: '#/components/schemas/StringProperty_allOf'
+    ChoiceProperty:
+      allOf:
+      - $ref: '#/components/schemas/Property'
+      - $ref: '#/components/schemas/ChoiceProperty_allOf'
+    ChoiceElement:
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+      type: object
+    DecimalProperty:
+      allOf:
+      - $ref: '#/components/schemas/Property'
+      - $ref: '#/components/schemas/DecimalProperty_allOf'
+    DistributionProperty:
+      allOf:
+      - $ref: '#/components/schemas/Property'
+      - $ref: '#/components/schemas/DistributionProperty_allOf'
+    Distribution:
+      discriminator:
+        mapping:
+          UNIFORM: '#/components/schemas/UniformDistribution'
+          EXPONENTIAL: '#/components/schemas/ExponentialDistribution'
+        propertyName: distributionType
+      properties:
+        distributionType:
+          type: string
+      required:
+      - distributionType
+      type: object
+    UniformDistribution:
+      allOf:
+      - $ref: '#/components/schemas/Distribution'
+      - $ref: '#/components/schemas/UniformDistribution_allOf'
+    ExponentialDistribution:
+      allOf:
+      - $ref: '#/components/schemas/Distribution'
+      - $ref: '#/components/schemas/ExponentialDistribution_allOf'
     StringAnalysisResult_allOf:
       properties:
         message:
@@ -292,6 +369,47 @@ components:
           items:
             $ref: '#/components/schemas/XYPoint'
           type: array
+      type: object
+    IntegerProperty_allOf:
+      properties:
+        value:
+          type: integer
+      type: object
+    StringProperty_allOf:
+      properties:
+        value:
+          type: string
+      type: object
+    ChoiceProperty_allOf:
+      properties:
+        choices:
+          items:
+            $ref: '#/components/schemas/ChoiceElement'
+          type: array
+        value:
+          type: string
+      type: object
+    DecimalProperty_allOf:
+      properties:
+        value:
+          type: number
+      type: object
+    DistributionProperty_allOf:
+      properties:
+        value:
+          $ref: '#/components/schemas/Distribution'
+      type: object
+    UniformDistribution_allOf:
+      properties:
+        left:
+          type: number
+        right:
+          type: number
+      type: object
+    ExponentialDistribution_allOf:
+      properties:
+        lambda:
+          type: number
       type: object
   securitySchemes:
     bearerAuth:

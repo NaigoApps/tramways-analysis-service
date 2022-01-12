@@ -17,6 +17,7 @@
         <module>rest-api/v1/generated/spring</module>
         <module>analysis-service-commons-core</module>
         <module>analysis-service-outbound-api</module>
+        <module>analysis-service-core</module>
     </modules>
 
     <name>analysis-service</name>

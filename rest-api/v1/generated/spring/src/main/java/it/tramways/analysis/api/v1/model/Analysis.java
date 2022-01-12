@@ -19,7 +19,7 @@ import java.util.*;
 /**
  * Analysis
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-11T23:13:19.434+01:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-12T12:53:06.696+01:00[Europe/Berlin]")
 public class Analysis   {
   @JsonProperty("uuid")
   private String uuid;

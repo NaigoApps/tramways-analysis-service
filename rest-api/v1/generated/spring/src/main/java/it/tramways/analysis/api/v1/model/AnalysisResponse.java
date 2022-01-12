@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import it.tramways.analysis.api.v1.model.Property;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -19,7 +20,7 @@ import java.util.*;
 /**
  * AnalysisResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-11T23:13:19.434+01:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-12T12:53:06.696+01:00[Europe/Berlin]")
 public class AnalysisResponse   {
   @JsonProperty("warnings")
   @Valid
@@ -27,7 +28,7 @@ public class AnalysisResponse   {
 
   @JsonProperty("parameters")
   @Valid
-  private List<Object> parameters = null;
+  private List<Property> parameters = null;
 
   @JsonProperty("ok")
   private Boolean ok;
@@ -60,12 +61,12 @@ public class AnalysisResponse   {
     this.warnings = warnings;
   }
 
-  public AnalysisResponse parameters(List<Object> parameters) {
+  public AnalysisResponse parameters(List<Property> parameters) {
     this.parameters = parameters;
     return this;
   }
 
-  public AnalysisResponse addParametersItem(Object parametersItem) {
+  public AnalysisResponse addParametersItem(Property parametersItem) {
     if (this.parameters == null) {
       this.parameters = new ArrayList<>();
     }
@@ -79,12 +80,13 @@ public class AnalysisResponse   {
   */
   @ApiModelProperty(value = "")
 
+  @Valid
 
-  public List<Object> getParameters() {
+  public List<Property> getParameters() {
     return parameters;
   }
 
-  public void setParameters(List<Object> parameters) {
+  public void setParameters(List<Property> parameters) {
     this.parameters = parameters;
   }
 

@@ -13,6 +13,7 @@
  */
 
 
+import { Property } from './property';
 
 /**
  * 
@@ -40,9 +41,9 @@ export interface AnalysisRequest {
     'analysisTypeId'?: string;
     /**
      * 
-     * @type {Array<object>}
+     * @type {Array<Property>}
      * @memberof AnalysisRequest
      */
-    'parameters'?: Array<object>;
+    'parameters'?: Array<Property>;
 }
 

@@ -64,6 +64,80 @@ public class JSON {
                                 getDiscriminatorValue(readElement, "resultType"));
                     }
           })
+                .registerTypeSelector(ChoiceProperty.class, new TypeSelector<ChoiceProperty>() {
+                    @Override
+                    public Class<? extends ChoiceProperty> getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("ChoiceProperty", ChoiceProperty.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "propertyType"));
+                    }
+          })
+                .registerTypeSelector(DecimalProperty.class, new TypeSelector<DecimalProperty>() {
+                    @Override
+                    public Class<? extends DecimalProperty> getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("DecimalProperty", DecimalProperty.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "propertyType"));
+                    }
+          })
+                .registerTypeSelector(Distribution.class, new TypeSelector<Distribution>() {
+                    @Override
+                    public Class<? extends Distribution> getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("EXPONENTIAL", ExponentialDistribution.class);
+                        classByDiscriminatorValue.put("ExponentialDistribution", ExponentialDistribution.class);
+                        classByDiscriminatorValue.put("UNIFORM", UniformDistribution.class);
+                        classByDiscriminatorValue.put("UniformDistribution", UniformDistribution.class);
+                        classByDiscriminatorValue.put("Distribution", Distribution.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "distributionType"));
+                    }
+          })
+                .registerTypeSelector(DistributionProperty.class, new TypeSelector<DistributionProperty>() {
+                    @Override
+                    public Class<? extends DistributionProperty> getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("DistributionProperty", DistributionProperty.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "propertyType"));
+                    }
+          })
+                .registerTypeSelector(ExponentialDistribution.class, new TypeSelector<ExponentialDistribution>() {
+                    @Override
+                    public Class<? extends ExponentialDistribution> getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("EXPONENTIAL", ExponentialDistribution.class);
+                        classByDiscriminatorValue.put("UNIFORM", UniformDistribution.class);
+                        classByDiscriminatorValue.put("ExponentialDistribution", ExponentialDistribution.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "distributionType"));
+                    }
+          })
+                .registerTypeSelector(IntegerProperty.class, new TypeSelector<IntegerProperty>() {
+                    @Override
+                    public Class<? extends IntegerProperty> getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("IntegerProperty", IntegerProperty.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "propertyType"));
+                    }
+          })
+                .registerTypeSelector(Property.class, new TypeSelector<Property>() {
+                    @Override
+                    public Class<? extends Property> getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("ChoiceProperty", ChoiceProperty.class);
+                        classByDiscriminatorValue.put("DecimalProperty", DecimalProperty.class);
+                        classByDiscriminatorValue.put("DistributionProperty", DistributionProperty.class);
+                        classByDiscriminatorValue.put("IntegerProperty", IntegerProperty.class);
+                        classByDiscriminatorValue.put("StringProperty", StringProperty.class);
+                        classByDiscriminatorValue.put("Property", Property.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "propertyType"));
+                    }
+          })
                 .registerTypeSelector(StringAnalysisResult.class, new TypeSelector<StringAnalysisResult>() {
                     @Override
                     public Class<? extends StringAnalysisResult> getClassForElement(JsonElement readElement) {
@@ -71,6 +145,26 @@ public class JSON {
                         classByDiscriminatorValue.put("StringAnalysisResult", StringAnalysisResult.class);
                         return getClassByDiscriminator(classByDiscriminatorValue,
                                 getDiscriminatorValue(readElement, "resultType"));
+                    }
+          })
+                .registerTypeSelector(StringProperty.class, new TypeSelector<StringProperty>() {
+                    @Override
+                    public Class<? extends StringProperty> getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("StringProperty", StringProperty.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "propertyType"));
+                    }
+          })
+                .registerTypeSelector(UniformDistribution.class, new TypeSelector<UniformDistribution>() {
+                    @Override
+                    public Class<? extends UniformDistribution> getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("EXPONENTIAL", ExponentialDistribution.class);
+                        classByDiscriminatorValue.put("UNIFORM", UniformDistribution.class);
+                        classByDiscriminatorValue.put("UniformDistribution", UniformDistribution.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "distributionType"));
                     }
           })
                 .registerTypeSelector(XYAnalysisResult.class, new TypeSelector<XYAnalysisResult>() {

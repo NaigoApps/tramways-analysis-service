@@ -2,7 +2,7 @@
 
 Tramways Analysis API
 - API version: 1.0.0-SNAPSHOT
-  - Build date: 2022-01-11T23:13:23.739+01:00[Europe/Berlin]
+  - Build date: 2022-01-12T12:53:10.520+01:00[Europe/Berlin]
 
 Tramways Analysis API
 
@@ -136,8 +136,25 @@ Class | Method | HTTP request | Description
  - [AnalysisResult](docs/AnalysisResult.md)
  - [AnalysisStatus](docs/AnalysisStatus.md)
  - [AnalysisType](docs/AnalysisType.md)
+ - [ChoiceElement](docs/ChoiceElement.md)
+ - [ChoiceProperty](docs/ChoiceProperty.md)
+ - [ChoicePropertyAllOf](docs/ChoicePropertyAllOf.md)
+ - [DecimalProperty](docs/DecimalProperty.md)
+ - [DecimalPropertyAllOf](docs/DecimalPropertyAllOf.md)
+ - [Distribution](docs/Distribution.md)
+ - [DistributionProperty](docs/DistributionProperty.md)
+ - [DistributionPropertyAllOf](docs/DistributionPropertyAllOf.md)
+ - [ExponentialDistribution](docs/ExponentialDistribution.md)
+ - [ExponentialDistributionAllOf](docs/ExponentialDistributionAllOf.md)
+ - [IntegerProperty](docs/IntegerProperty.md)
+ - [IntegerPropertyAllOf](docs/IntegerPropertyAllOf.md)
+ - [Property](docs/Property.md)
  - [StringAnalysisResult](docs/StringAnalysisResult.md)
  - [StringAnalysisResultAllOf](docs/StringAnalysisResultAllOf.md)
+ - [StringProperty](docs/StringProperty.md)
+ - [StringPropertyAllOf](docs/StringPropertyAllOf.md)
+ - [UniformDistribution](docs/UniformDistribution.md)
+ - [UniformDistributionAllOf](docs/UniformDistributionAllOf.md)
  - [XYAnalysisResult](docs/XYAnalysisResult.md)
  - [XYAnalysisResultAllOf](docs/XYAnalysisResultAllOf.md)
  - [XYPoint](docs/XYPoint.md)

@@ -22,6 +22,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import it.tramways.analysis.api.v1.model.Property;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ import java.util.List;
 /**
  * AnalysisRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-01-11T23:13:23.739+01:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-01-12T12:53:10.520+01:00[Europe/Berlin]")
 public class AnalysisRequest {
   public static final String SERIALIZED_NAME_PROJECT_ID = "projectId";
   @SerializedName(SERIALIZED_NAME_PROJECT_ID)
@@ -45,7 +46,7 @@ public class AnalysisRequest {
 
   public static final String SERIALIZED_NAME_PARAMETERS = "parameters";
   @SerializedName(SERIALIZED_NAME_PARAMETERS)
-  private List<Object> parameters = null;
+  private List<Property> parameters = null;
 
   public AnalysisRequest() { 
   }
@@ -119,15 +120,15 @@ public class AnalysisRequest {
   }
 
 
-  public AnalysisRequest parameters(List<Object> parameters) {
+  public AnalysisRequest parameters(List<Property> parameters) {
     
     this.parameters = parameters;
     return this;
   }
 
-  public AnalysisRequest addParametersItem(Object parametersItem) {
+  public AnalysisRequest addParametersItem(Property parametersItem) {
     if (this.parameters == null) {
-      this.parameters = new ArrayList<Object>();
+      this.parameters = new ArrayList<Property>();
     }
     this.parameters.add(parametersItem);
     return this;
@@ -140,12 +141,12 @@ public class AnalysisRequest {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public List<Object> getParameters() {
+  public List<Property> getParameters() {
     return parameters;
   }
 
 
-  public void setParameters(List<Object> parameters) {
+  public void setParameters(List<Property> parameters) {
     this.parameters = parameters;
   }
 

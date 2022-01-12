@@ -1,5 +1,6 @@
 package it.tramways;
 
+import inbound.AnalysisService;
 import it.tramways.analysis.commons.kafka.AnalysisKafkaTopicsUtility;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -24,8 +25,8 @@ public class AnalysisResultReceiverConfiguration {
 
     @Autowired
     public AnalysisResultReceiverConfiguration(
-        AnalysisService analysisService
-    ){
+            AnalysisService analysisService
+    ) {
         this.analysisService = analysisService;
     }
 

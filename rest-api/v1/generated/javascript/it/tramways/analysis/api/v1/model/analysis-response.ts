@@ -13,6 +13,7 @@
  */
 
 
+import { Property } from './property';
 
 /**
  * 
@@ -28,10 +29,10 @@ export interface AnalysisResponse {
     'warnings'?: Array<string>;
     /**
      * 
-     * @type {Array<object>}
+     * @type {Array<Property>}
      * @memberof AnalysisResponse
      */
-    'parameters'?: Array<object>;
+    'parameters'?: Array<Property>;
     /**
      * 
      * @type {boolean}

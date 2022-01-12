@@ -13,7 +13,7 @@
 
 package it.tramways.analysis.api;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-01-11T23:13:23.739+01:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-01-12T12:53:10.520+01:00[Europe/Berlin]")
 public class Pair {
     private String name = "";
     private String value = "";

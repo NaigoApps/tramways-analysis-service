@@ -14,11 +14,12 @@
       <artifactId>analysis-service-commons-kafka</artifactId>
       <version>1.0.0-SNAPSHOT</version>
     </dependency>
-    <dependency>
-      <groupId>it.tramways</groupId>
-      <artifactId>analysis-service</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
-    </dependency>
+      <dependency>
+          <groupId>it.tramways</groupId>
+          <artifactId>analysis-service-core</artifactId>
+          <version>1.0.0-SNAPSHOT</version>
+          <scope>compile</scope>
+      </dependency>
   </dependencies>
   <dependencyManagement>
     <dependencies>
