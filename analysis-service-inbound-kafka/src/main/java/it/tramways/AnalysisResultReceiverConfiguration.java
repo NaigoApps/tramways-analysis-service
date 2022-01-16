@@ -43,7 +43,7 @@ public class AnalysisResultReceiverConfiguration {
     @Bean
     public ContainerProperties containerProperties() {
         ContainerProperties containerProps = new ContainerProperties(getAnalysisResultTopic());
-        containerProps.setMessageListener((MessageListener<Integer, String>) integerStringConsumerRecord -> launcher.launch());
+//        containerProps.setMessageListener((MessageListener<Integer, String>) integerStringConsumerRecord -> launcher.launch());
         return containerProps;
     }
 

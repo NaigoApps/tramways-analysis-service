@@ -1,6 +1,6 @@
 {
   "name": "@tramways/analysis-service-api",
-  "version": "1.0.0-SNAPSHOT",
+  "version": "1.0.0",
   "description": "OpenAPI client for @tramways/analysis-service-api",
   "author": "OpenAPI-Generator Contributors",
   "keywords": [

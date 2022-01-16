@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   description: Tramways Analysis API
   title: Tramways Analysis API
-  version: 1.0.0-SNAPSHOT
+  version: 1.0.0
 servers:
 - url: http://localhost:8762/tramways/rest
 security:

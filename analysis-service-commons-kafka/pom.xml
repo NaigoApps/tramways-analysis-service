@@ -8,7 +8,7 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <groupId>org.springframework.boot</groupId>
         <relativePath/>
-        <version>2.3.4.RELEASE</version>
+        <version>2.3.3.RELEASE</version>
     </parent>
 
     <groupId>it.tramways</groupId>
@@ -25,8 +25,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
-
-
         <dependency>
             <artifactId>spring-kafka</artifactId>
             <groupId>org.springframework.kafka</groupId>

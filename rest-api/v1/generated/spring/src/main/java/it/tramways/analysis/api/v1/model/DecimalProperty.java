@@ -20,7 +20,7 @@ import java.util.*;
 /**
  * DecimalProperty
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-12T12:53:06.696+01:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-14T00:29:58.422+01:00[Europe/Berlin]")
 public class DecimalProperty extends Property  {
   @JsonProperty("value")
   private BigDecimal value;

@@ -1,8 +1,8 @@
 # analysis-service-client-api
 
 Tramways Analysis API
-- API version: 1.0.0-SNAPSHOT
-  - Build date: 2022-01-12T12:53:10.520+01:00[Europe/Berlin]
+- API version: 1.0.0
+  - Build date: 2022-01-14T00:30:02.311+01:00[Europe/Berlin]
 
 Tramways Analysis API
 
