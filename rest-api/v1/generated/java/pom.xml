@@ -5,7 +5,7 @@
     <artifactId>analysis-service-client-api</artifactId>
     <packaging>jar</packaging>
     <name>analysis-service-client-api</name>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.3</version>
     <url>https://github.com/openapitools/openapi-generator</url>
     <description>OpenAPI Java</description>
     <scm>

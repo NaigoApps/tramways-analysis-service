@@ -1,11 +1,11 @@
 package it.tramways;
 
-import inbound.AnalysisService;
-import it.tramways.analysis.commons.kafka.AnalysisKafkaTopicsUtility;
+import it.tramways.analysis.core.AnalysisService;
+import it.tramways.analysis.api.v1.model.AnalysisResult;
+import it.tramways.analysis.api.v1.model.AnalysisStatus;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.IntegerDeserializer;
-import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,16 +13,20 @@ import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ContainerProperties;
 import org.springframework.kafka.listener.KafkaMessageListenerContainer;
-import org.springframework.kafka.listener.MessageListener;
+import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static it.tramways.analysis.commons.kafka.AnalysisKafkaTopicsUtility.getAnalysisResultTopic;
+import static it.tramways.analysis.commons.kafka.AnalysisKafkaTopicsUtility.getAnalysisStatusTopic;
 
 @Configuration
 public class AnalysisResultReceiverConfiguration {
 
     private AnalysisService analysisService;
 
+    //TODO WHY
     @Autowired
     public AnalysisResultReceiverConfiguration(
             AnalysisService analysisService
@@ -32,38 +36,44 @@ public class AnalysisResultReceiverConfiguration {
 
 
     @Bean
+    public NewTopic analysisStatusTopic() {
+        return TopicBuilder.name(getAnalysisStatusTopic()).build();
+    }
+
+    @Bean
     public NewTopic analysisResultTopic() {
         return TopicBuilder.name(getAnalysisResultTopic()).build();
     }
 
-    private String getAnalysisResultTopic() {
-        return AnalysisKafkaTopicsUtility.getAnalysisResultTopic();
-    }
-
     @Bean
-    public ContainerProperties containerProperties() {
+    public KafkaMessageListenerContainer<Integer, AnalysisResult> analysisResultListenerContainer() {
         ContainerProperties containerProps = new ContainerProperties(getAnalysisResultTopic());
-//        containerProps.setMessageListener((MessageListener<Integer, String>) integerStringConsumerRecord -> launcher.launch());
-        return containerProps;
+        //TODO
+        //        containerProps.setMessageListener(requestListener);
+//        containerProps.setGroupId(applicationConfig.getName());
+
+        Map<String, Object> props = consumerProps();
+        DefaultKafkaConsumerFactory<Integer, AnalysisResult> cf =
+                new DefaultKafkaConsumerFactory<>(props, new IntegerDeserializer(), new JsonDeserializer<>(AnalysisResult.class));
+        return new KafkaMessageListenerContainer<>(cf, containerProps);
     }
 
     @Bean
-    public KafkaMessageListenerContainer<Integer, String> messageListenerContainer(ContainerProperties containerProps) {
+    public KafkaMessageListenerContainer<Integer, AnalysisStatus> analysisStatusListenerContainer() {
+        ContainerProperties containerProps = new ContainerProperties(getAnalysisResultTopic());
+        //TODO
+        //        containerProps.setMessageListener(requestListener);
+//        containerProps.setGroupId(applicationConfig.getName());
+
         Map<String, Object> props = consumerProps();
-        DefaultKafkaConsumerFactory<Integer, String> cf =
-                new DefaultKafkaConsumerFactory<>(props);
+        DefaultKafkaConsumerFactory<Integer, AnalysisStatus> cf =
+                new DefaultKafkaConsumerFactory<>(props, new IntegerDeserializer(), new JsonDeserializer<>(AnalysisStatus.class));
         return new KafkaMessageListenerContainer<>(cf, containerProps);
     }
 
     private Map<String, Object> consumerProps() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "analysis");
-//        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
-//        props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "100");
-//        props.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "15000");
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, IntegerDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         return props;
     }
 }

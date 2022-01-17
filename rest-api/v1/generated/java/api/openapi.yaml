@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   description: Tramways Analysis API
   title: Tramways Analysis API
-  version: 1.0.0
+  version: 1.0.3
 servers:
 - url: http://localhost:8762/tramways/rest
 security:
@@ -175,15 +175,34 @@ components:
           uuid: uuid
           resultType: resultType
         name: name
+        mapId: mapId
         uuid: uuid
+        analysisType: analysisType
+        parameters:
+        - valid: true
+          propertyType: propertyType
+          name: name
+          description: description
+        - valid: true
+          propertyType: propertyType
+          name: name
+          description: description
         projectUuid: projectUuid
       properties:
         uuid:
           type: string
         projectUuid:
           type: string
+        mapId:
+          type: string
+        analysisType:
+          type: string
         name:
           type: string
+        parameters:
+          items:
+            $ref: '#/components/schemas/Property'
+          type: array
         status:
           $ref: '#/components/schemas/AnalysisStatus'
         result:

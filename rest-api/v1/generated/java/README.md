@@ -1,8 +1,8 @@
 # analysis-service-client-api
 
 Tramways Analysis API
-- API version: 1.0.0
-  - Build date: 2022-01-14T00:30:02.311+01:00[Europe/Berlin]
+- API version: 1.0.3
+  - Build date: 2022-01-17T23:33:48.022355900+01:00[Europe/Berlin]
 
 Tramways Analysis API
 
@@ -40,7 +40,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>it.tramways</groupId>
   <artifactId>analysis-service-client-api</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.3</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -56,7 +56,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "it.tramways:analysis-service-client-api:1.0.0-SNAPSHOT"
+     implementation "it.tramways:analysis-service-client-api:1.0.3"
   }
 ```
 
@@ -70,7 +70,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/analysis-service-client-api-1.0.0-SNAPSHOT.jar`
+* `target/analysis-service-client-api-1.0.3.jar`
 * `target/lib/*.jar`
 
 ## Getting Started

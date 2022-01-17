@@ -1,6 +1,6 @@
-package it.tramways.analysis.commons.kafka;
+package it.tramways;
 
-import it.tramways.analysis.api.v1.model.AnalysisResult;
+import it.tramways.analysis.api.v1.model.AnalysisRequest;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.IntegerSerializer;
 import org.springframework.context.annotation.Bean;
@@ -14,29 +14,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class OutboundKafkaConfiguration {
+public class OutboundAnalysisKafkaConfiguration {
 
-    /**
-     * Sets up Kafka-Spring producer factory
-     *
-     * @return ProducerFactory
-     */
     @Bean
-    public ProducerFactory<Integer, AnalysisResult> producerFactory() {
-        return new DefaultKafkaProducerFactory<>(producerProps(), new IntegerSerializer(), new JsonSerializer<>());
+    public KafkaTemplate<Integer, AnalysisRequest> analysisLaunchTemplate() {
+        return new KafkaTemplate<>(createProducerFactory());
     }
 
-    /**
-     * Sets up channel for analysis result
-     *
-     * @return ProducerFactory
-     */
-    @Bean
-    public KafkaTemplate<Integer, AnalysisResult> analysisResultTemplate() {
-        return new KafkaTemplate<>(producerFactory());
+    private <T> DefaultKafkaProducerFactory<Integer, T> createProducerFactory() {
+        return new DefaultKafkaProducerFactory<>(defaultProps(), new IntegerSerializer(), new JsonSerializer<>());
     }
 
-    private Map<String, Object> producerProps() {
+    private Map<String, Object> defaultProps() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         return props;

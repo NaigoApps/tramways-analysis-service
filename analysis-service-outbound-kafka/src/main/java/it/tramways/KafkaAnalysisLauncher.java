@@ -2,29 +2,30 @@ package it.tramways;
 
 import it.tramways.analysis.api.AnalysisLauncher;
 import it.tramways.analysis.api.v1.model.Analysis;
-import org.apache.kafka.clients.admin.NewTopic;
+import it.tramways.analysis.api.v1.model.AnalysisRequest;
+import it.tramways.analysis.commons.kafka.AnalysisKafkaTopicsUtility;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Component;
 
+@Component
 public class KafkaAnalysisLauncher implements AnalysisLauncher {
 
-    @KafkaListener(id = "myId", topics = "analysis")
-    public void listen(String input) {
-        System.out.println(input);
-    }
+    private final KafkaTemplate<Integer, AnalysisRequest> analysisLaunchTemplate;
 
     @Autowired
-    private KafkaTemplate<String, String> template;
-
-    public void send() {
-        template.send("analysis", "data");
+    public KafkaAnalysisLauncher(
+            KafkaTemplate<Integer, AnalysisRequest> analysisLaunchTemplate
+    ) {
+        this.analysisLaunchTemplate = analysisLaunchTemplate;
     }
 
     @Override
-    public void launch(Analysis analysis) {
+    public void launch(AnalysisRequest analysis) {
+        analysisLaunchTemplate.send(getLaunchTopic(analysis), analysis);
+    }
 
+    private String getLaunchTopic(AnalysisRequest analysis) {
+        return AnalysisKafkaTopicsUtility.getAnalysisLaunchTopic(analysis.getAnalysisTypeId());
     }
 }

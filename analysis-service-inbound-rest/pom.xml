@@ -20,20 +20,15 @@
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <artifactId>tramways-commons-properties-model</artifactId>
-            <groupId>it.tramways</groupId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <artifactId>tramways-commons-analysis-model</artifactId>
-            <groupId>it.tramways</groupId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>it.tramways</groupId>
             <artifactId>analysis-service-server-api</artifactId>
             <version>1.0.0-SNAPSHOT</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>it.tramways</groupId>
+            <artifactId>analysis-service-core</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

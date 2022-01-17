@@ -8,6 +8,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import it.tramways.analysis.api.v1.model.AnalysisResult;
 import it.tramways.analysis.api.v1.model.AnalysisStatus;
+import it.tramways.analysis.api.v1.model.Property;
+import java.util.ArrayList;
+import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -19,7 +22,7 @@ import java.util.*;
 /**
  * Analysis
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-14T00:29:58.422+01:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-17T23:33:43.660141500+01:00[Europe/Berlin]")
 public class Analysis   {
   @JsonProperty("uuid")
   private String uuid;
@@ -27,8 +30,18 @@ public class Analysis   {
   @JsonProperty("projectUuid")
   private String projectUuid;
 
+  @JsonProperty("mapId")
+  private String mapId;
+
+  @JsonProperty("analysisType")
+  private String analysisType;
+
   @JsonProperty("name")
   private String name;
+
+  @JsonProperty("parameters")
+  @Valid
+  private List<Property> parameters = null;
 
   @JsonProperty("status")
   private AnalysisStatus status;
@@ -76,6 +89,46 @@ public class Analysis   {
     this.projectUuid = projectUuid;
   }
 
+  public Analysis mapId(String mapId) {
+    this.mapId = mapId;
+    return this;
+  }
+
+  /**
+   * Get mapId
+   * @return mapId
+  */
+  @ApiModelProperty(value = "")
+
+
+  public String getMapId() {
+    return mapId;
+  }
+
+  public void setMapId(String mapId) {
+    this.mapId = mapId;
+  }
+
+  public Analysis analysisType(String analysisType) {
+    this.analysisType = analysisType;
+    return this;
+  }
+
+  /**
+   * Get analysisType
+   * @return analysisType
+  */
+  @ApiModelProperty(value = "")
+
+
+  public String getAnalysisType() {
+    return analysisType;
+  }
+
+  public void setAnalysisType(String analysisType) {
+    this.analysisType = analysisType;
+  }
+
   public Analysis name(String name) {
     this.name = name;
     return this;
@@ -94,6 +147,35 @@ public class Analysis   {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public Analysis parameters(List<Property> parameters) {
+    this.parameters = parameters;
+    return this;
+  }
+
+  public Analysis addParametersItem(Property parametersItem) {
+    if (this.parameters == null) {
+      this.parameters = new ArrayList<>();
+    }
+    this.parameters.add(parametersItem);
+    return this;
+  }
+
+  /**
+   * Get parameters
+   * @return parameters
+  */
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public List<Property> getParameters() {
+    return parameters;
+  }
+
+  public void setParameters(List<Property> parameters) {
+    this.parameters = parameters;
   }
 
   public Analysis status(AnalysisStatus status) {
@@ -150,14 +232,17 @@ public class Analysis   {
     Analysis analysis = (Analysis) o;
     return Objects.equals(this.uuid, analysis.uuid) &&
         Objects.equals(this.projectUuid, analysis.projectUuid) &&
+        Objects.equals(this.mapId, analysis.mapId) &&
+        Objects.equals(this.analysisType, analysis.analysisType) &&
         Objects.equals(this.name, analysis.name) &&
+        Objects.equals(this.parameters, analysis.parameters) &&
         Objects.equals(this.status, analysis.status) &&
         Objects.equals(this.result, analysis.result);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(uuid, projectUuid, name, status, result);
+    return Objects.hash(uuid, projectUuid, mapId, analysisType, name, parameters, status, result);
   }
 
   @Override
@@ -167,7 +252,10 @@ public class Analysis   {
     
     sb.append("    uuid: ").append(toIndentedString(uuid)).append("\n");
     sb.append("    projectUuid: ").append(toIndentedString(projectUuid)).append("\n");
+    sb.append("    mapId: ").append(toIndentedString(mapId)).append("\n");
+    sb.append("    analysisType: ").append(toIndentedString(analysisType)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    parameters: ").append(toIndentedString(parameters)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    result: ").append(toIndentedString(result)).append("\n");
     sb.append("}");

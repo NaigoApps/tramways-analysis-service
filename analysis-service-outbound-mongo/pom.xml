@@ -11,7 +11,7 @@
         <dependency>
             <groupId>it.tramways</groupId>
             <artifactId>analysis-service-server-api</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.3</version>
         </dependency>
         <dependency>
             <groupId>it.tramways</groupId>

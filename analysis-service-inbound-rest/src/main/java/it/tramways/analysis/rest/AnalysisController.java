@@ -1,5 +1,6 @@
 package it.tramways.analysis.rest;
 
+import it.tramways.analysis.core.AnalysisService;
 import it.tramways.analysis.api.v1.AnalysisApi;
 import it.tramways.analysis.api.v1.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ import java.util.stream.Collectors;
 public class AnalysisController implements AnalysisApi {
 
     private static final String ANALYSIS_TYPE = "analysis-type";
+
+    @Autowired
+    private AnalysisService analysisService;
 
     @Autowired
     private DiscoveryClient discoveryClient;

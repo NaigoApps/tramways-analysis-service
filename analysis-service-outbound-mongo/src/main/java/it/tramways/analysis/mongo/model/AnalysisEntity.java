@@ -11,6 +11,9 @@ public class AnalysisEntity extends Analysis {
         result.setUuid(analysis.getUuid());
         result.setName(analysis.getName());
         result.setProjectUuid(analysis.getProjectUuid());
+        result.setMapId(analysis.getMapId());
+        result.setAnalysisType(analysis.getAnalysisType());
+        result.setParameters(analysis.getParameters());
         result.setStatus(analysis.getStatus());
         result.setResult(analysis.getResult());
         return result;

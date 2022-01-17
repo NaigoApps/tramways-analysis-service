@@ -10,6 +10,10 @@ public class AnalysisKafkaTopicsUtility {
         return AnalysisKafkaTopics.ANALYSIS_LAUNCH + "-" + analysisService;
     }
 
+    public static String getAnalysisStatusTopic() {
+        return AnalysisKafkaTopics.ANALYSIS_STATUS;
+    }
+
     public static String getAnalysisResultTopic() {
         return AnalysisKafkaTopics.ANALYSIS_RESULT;
     }
