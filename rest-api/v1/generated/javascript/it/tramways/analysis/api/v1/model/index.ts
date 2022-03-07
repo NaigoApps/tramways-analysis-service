@@ -5,6 +5,7 @@ export * from './analysis-response';
 export * from './analysis-result';
 export * from './analysis-status';
 export * from './analysis-type';
+export * from './analysis-update-request';
 export * from './choice-element';
 export * from './choice-property';
 export * from './choice-property-all-of';

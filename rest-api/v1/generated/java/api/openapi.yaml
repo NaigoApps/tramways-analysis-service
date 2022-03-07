@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   description: Tramways Analysis API
   title: Tramways Analysis API
-  version: 1.0.3
+  version: 1.0.7
 servers:
 - url: http://localhost:8762/tramways/rest
 security:
@@ -39,24 +39,10 @@ paths:
       tags:
       - analysis
       x-accepts: application/json
-  /analysis/{projectId}/{mapId}/{analysisId}:
+  /analysis/{analysisId}:
     delete:
       operationId: deleteAnalysis
       parameters:
-      - explode: false
-        in: path
-        name: projectId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: mapId
-        required: true
-        schema:
-          type: string
-        style: simple
       - explode: false
         in: path
         name: analysisId
@@ -76,20 +62,6 @@ paths:
       parameters:
       - explode: false
         in: path
-        name: projectId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: mapId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
         name: analysisId
         required: true
         schema:
@@ -105,6 +77,33 @@ paths:
       summary: Gets an analysis
       tags:
       - analysis
+      x-accepts: application/json
+    put:
+      operationId: updateAnalysis
+      parameters:
+      - explode: false
+        in: path
+        name: analysisId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalysisUpdateRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analysis'
+          description: Ok
+      summary: Updates an analysis parameters
+      tags:
+      - analysis
+      x-contentType: application/json
       x-accepts: application/json
   /analysis/available:
     get:
@@ -150,7 +149,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AnalysisResponse'
+                $ref: '#/components/schemas/AnalysisDescription'
           description: Ok
       summary: Launch selected analysis
       tags:
@@ -172,7 +171,7 @@ components:
     Analysis:
       example:
         result:
-          uuid: uuid
+          analysisUuid: analysisUuid
           resultType: resultType
         name: name
         mapId: mapId
@@ -207,6 +206,23 @@ components:
           $ref: '#/components/schemas/AnalysisStatus'
         result:
           $ref: '#/components/schemas/AnalysisResult'
+      type: object
+    AnalysisUpdateRequest:
+      example:
+        parameters:
+        - valid: true
+          propertyType: propertyType
+          name: name
+          description: description
+        - valid: true
+          propertyType: propertyType
+          name: name
+          description: description
+      properties:
+        parameters:
+          items:
+            $ref: '#/components/schemas/Property'
+          type: array
       type: object
     AnalysisDescription:
       example:
@@ -253,20 +269,6 @@ components:
           type: array
       type: object
     AnalysisResponse:
-      example:
-        warnings:
-        - warnings
-        - warnings
-        ok: true
-        parameters:
-        - valid: true
-          propertyType: propertyType
-          name: name
-          description: description
-        - valid: true
-          propertyType: propertyType
-          name: name
-          description: description
       properties:
         warnings:
           items:
@@ -283,10 +285,10 @@ components:
       discriminator:
         propertyName: resultType
       example:
-        uuid: uuid
+        analysisUuid: analysisUuid
         resultType: resultType
       properties:
-        uuid:
+        analysisUuid:
           type: string
         resultType:
           type: string

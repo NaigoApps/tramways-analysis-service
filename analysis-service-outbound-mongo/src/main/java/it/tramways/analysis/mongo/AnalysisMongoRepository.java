@@ -31,10 +31,18 @@ public class AnalysisMongoRepository implements AnalysisRepository {
                         Collectors.toList());
     }
 
+    @Override
+    public List<AnalysisDescription> findMapAnalysis(String projectUuid, String mapUuid) {
+        return analysisDelegate.findAll(analysisWithMap(projectUuid, mapUuid)).stream()
+                .map(this::convertAnalysis).collect(
+                        Collectors.toList());
+    }
+
     private AnalysisDescription convertAnalysis(AnalysisEntity entity) {
         AnalysisDescription result = new AnalysisDescription();
         result.setUuid(entity.getUuid());
         result.setName(entity.getName());
+        result.setStatus(entity.getStatus());
         return result;
     }
 
@@ -69,6 +77,13 @@ public class AnalysisMongoRepository implements AnalysisRepository {
     private Example<AnalysisEntity> analysisWithProject(String projectUuid) {
         AnalysisEntity probe = new AnalysisEntity();
         probe.setProjectUuid(projectUuid);
+        return Example.of(probe);
+    }
+
+    private Example<AnalysisEntity> analysisWithMap(String projectUuid, String mapUuid) {
+        AnalysisEntity probe = new AnalysisEntity();
+        probe.setProjectUuid(projectUuid);
+        probe.setMapId(mapUuid);
         return Example.of(probe);
     }
 

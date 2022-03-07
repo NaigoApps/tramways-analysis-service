@@ -13,6 +13,7 @@ docs/AnalysisResponse.md
 docs/AnalysisResult.md
 docs/AnalysisStatus.md
 docs/AnalysisType.md
+docs/AnalysisUpdateRequest.md
 docs/ChoiceElement.md
 docs/ChoiceProperty.md
 docs/ChoicePropertyAllOf.md
@@ -69,6 +70,7 @@ src/main/java/it/tramways/analysis/api/v1/model/AnalysisResponse.java
 src/main/java/it/tramways/analysis/api/v1/model/AnalysisResult.java
 src/main/java/it/tramways/analysis/api/v1/model/AnalysisStatus.java
 src/main/java/it/tramways/analysis/api/v1/model/AnalysisType.java
+src/main/java/it/tramways/analysis/api/v1/model/AnalysisUpdateRequest.java
 src/main/java/it/tramways/analysis/api/v1/model/ChoiceElement.java
 src/main/java/it/tramways/analysis/api/v1/model/ChoiceProperty.java
 src/main/java/it/tramways/analysis/api/v1/model/ChoicePropertyAllOf.java
@@ -99,6 +101,7 @@ src/test/java/it/tramways/analysis/api/v1/model/AnalysisResultTest.java
 src/test/java/it/tramways/analysis/api/v1/model/AnalysisStatusTest.java
 src/test/java/it/tramways/analysis/api/v1/model/AnalysisTest.java
 src/test/java/it/tramways/analysis/api/v1/model/AnalysisTypeTest.java
+src/test/java/it/tramways/analysis/api/v1/model/AnalysisUpdateRequestTest.java
 src/test/java/it/tramways/analysis/api/v1/model/ChoiceElementTest.java
 src/test/java/it/tramways/analysis/api/v1/model/ChoicePropertyAllOfTest.java
 src/test/java/it/tramways/analysis/api/v1/model/ChoicePropertyTest.java

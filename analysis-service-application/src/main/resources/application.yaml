@@ -6,6 +6,8 @@ spring:
   data:
     mongodb:
       database: tramways_analysis
+  kafka:
+    bootstrap-servers: ${KAFKA_URI:http://localhost:9092}
 
 eureka:
   instance:

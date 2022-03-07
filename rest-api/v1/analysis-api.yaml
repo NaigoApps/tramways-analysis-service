@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Tramways Analysis API
   description: Tramways Analysis API
-  version: 1.0.3
+  version: 1.0.7
 servers:
   - url: http://localhost:8762/tramways/rest
 paths:
@@ -31,22 +31,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/AnalysisDescription'
-  /analysis/{projectId}/{mapId}/{analysisId}:
+  /analysis/{analysisId}:
     get:
       summary: 'Gets an analysis'
       operationId: 'getAnalysis'
       tags: [ 'analysis' ]
       parameters:
-        - in: path
-          name: projectId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: mapId
-          required: true
-          schema:
-            type: string
         - in: path
           name: analysisId
           required: true
@@ -59,21 +49,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Analysis'
+    put:
+      summary: 'Updates an analysis parameters'
+      operationId: 'updateAnalysis'
+      tags: [ 'analysis' ]
+      parameters:
+        - in: path
+          name: analysisId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalysisUpdateRequest'
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analysis'
     delete:
       summary: 'Deletes an analysis'
       operationId: 'deleteAnalysis'
       tags: [ 'analysis' ]
       parameters:
-        - in: path
-          name: projectId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: mapId
-          required: true
-          schema:
-            type: string
         - in: path
           name: analysisId
           required: true
@@ -123,7 +125,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AnalysisResponse'
+                $ref: '#/components/schemas/AnalysisDescription'
 components:
   securitySchemes:
     bearerAuth:
@@ -159,6 +161,13 @@ components:
           $ref: '#/components/schemas/AnalysisStatus'
         result:
           $ref: '#/components/schemas/AnalysisResult'
+    AnalysisUpdateRequest:
+      type: object
+      properties:
+        parameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Property'
     AnalysisDescription:
       type: object
       properties:
@@ -200,7 +209,7 @@ components:
     AnalysisResult:
       type: object
       properties:
-        uuid:
+        analysisUuid:
           type: string
         resultType:
           type: string

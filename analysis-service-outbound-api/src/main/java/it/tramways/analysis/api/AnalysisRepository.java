@@ -9,6 +9,8 @@ public interface AnalysisRepository {
 
     List<AnalysisDescription> findProjectAnalysis(String projectUuid);
 
+    List<AnalysisDescription> findMapAnalysis(String projectUuid, String mapUuid);
+
     Analysis findAnalysis(String uuid);
 
     Analysis createAnalysis(Analysis command);

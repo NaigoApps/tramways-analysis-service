@@ -1,9 +1,9 @@
 package it.tramways;
 
 import it.tramways.analysis.api.AnalysisLauncher;
-import it.tramways.analysis.api.v1.model.Analysis;
 import it.tramways.analysis.api.v1.model.AnalysisRequest;
 import it.tramways.analysis.commons.kafka.AnalysisKafkaTopicsUtility;
+import it.tramways.analysis.commons.kafka.messages.AnalysisRequestMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
@@ -11,21 +11,28 @@ import org.springframework.stereotype.Component;
 @Component
 public class KafkaAnalysisLauncher implements AnalysisLauncher {
 
-    private final KafkaTemplate<Integer, AnalysisRequest> analysisLaunchTemplate;
+    private final KafkaTemplate<Integer, AnalysisRequestMessage> analysisLaunchTemplate;
 
     @Autowired
     public KafkaAnalysisLauncher(
-            KafkaTemplate<Integer, AnalysisRequest> analysisLaunchTemplate
+            KafkaTemplate<Integer, AnalysisRequestMessage> analysisLaunchTemplate
     ) {
         this.analysisLaunchTemplate = analysisLaunchTemplate;
     }
 
     @Override
-    public void launch(AnalysisRequest analysis) {
-        analysisLaunchTemplate.send(getLaunchTopic(analysis), analysis);
+    public void launch(String analysisUuid, AnalysisRequest request) {
+        analysisLaunchTemplate.send(getLaunchTopic(request), createAnalysisRequestMessage(analysisUuid, request));
     }
 
-    private String getLaunchTopic(AnalysisRequest analysis) {
-        return AnalysisKafkaTopicsUtility.getAnalysisLaunchTopic(analysis.getAnalysisTypeId());
+    private AnalysisRequestMessage createAnalysisRequestMessage(String analysisUuid, AnalysisRequest request) {
+        AnalysisRequestMessage msg = new AnalysisRequestMessage();
+        msg.setAnalysisUuid(analysisUuid);
+        msg.setBody(request);
+        return msg;
+    }
+
+    private String getLaunchTopic(AnalysisRequest request) {
+        return AnalysisKafkaTopicsUtility.getAnalysisLaunchTopic(request.getAnalysisTypeId());
     }
 }

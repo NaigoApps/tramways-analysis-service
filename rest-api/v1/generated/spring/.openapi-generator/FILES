@@ -10,6 +10,7 @@ src/main/java/it/tramways/analysis/api/v1/model/AnalysisResponse.java
 src/main/java/it/tramways/analysis/api/v1/model/AnalysisResult.java
 src/main/java/it/tramways/analysis/api/v1/model/AnalysisStatus.java
 src/main/java/it/tramways/analysis/api/v1/model/AnalysisType.java
+src/main/java/it/tramways/analysis/api/v1/model/AnalysisUpdateRequest.java
 src/main/java/it/tramways/analysis/api/v1/model/ChoiceElement.java
 src/main/java/it/tramways/analysis/api/v1/model/ChoiceProperty.java
 src/main/java/it/tramways/analysis/api/v1/model/ChoicePropertyAllOf.java

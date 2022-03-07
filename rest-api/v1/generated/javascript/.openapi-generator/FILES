@@ -15,6 +15,7 @@ it/tramways/analysis/api/v1/model/analysis-response.ts
 it/tramways/analysis/api/v1/model/analysis-result.ts
 it/tramways/analysis/api/v1/model/analysis-status.ts
 it/tramways/analysis/api/v1/model/analysis-type.ts
+it/tramways/analysis/api/v1/model/analysis-update-request.ts
 it/tramways/analysis/api/v1/model/analysis.ts
 it/tramways/analysis/api/v1/model/choice-element.ts
 it/tramways/analysis/api/v1/model/choice-property-all-of.ts

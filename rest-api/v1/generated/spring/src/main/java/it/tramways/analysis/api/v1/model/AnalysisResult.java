@@ -19,7 +19,7 @@ import java.util.*;
 /**
  * AnalysisResult
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-17T23:33:43.660141500+01:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-23T18:21:37.178204400+01:00[Europe/Berlin]")
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "resultType", visible = true)
 @JsonSubTypes({
   @JsonSubTypes.Type(value = StringAnalysisResult.class, name = "StringAnalysisResult"),
@@ -27,30 +27,30 @@ import java.util.*;
 })
 
 public class AnalysisResult   {
-  @JsonProperty("uuid")
-  private String uuid;
+  @JsonProperty("analysisUuid")
+  private String analysisUuid;
 
   @JsonProperty("resultType")
   private String resultType;
 
-  public AnalysisResult uuid(String uuid) {
-    this.uuid = uuid;
+  public AnalysisResult analysisUuid(String analysisUuid) {
+    this.analysisUuid = analysisUuid;
     return this;
   }
 
   /**
-   * Get uuid
-   * @return uuid
+   * Get analysisUuid
+   * @return analysisUuid
   */
   @ApiModelProperty(value = "")
 
 
-  public String getUuid() {
-    return uuid;
+  public String getAnalysisUuid() {
+    return analysisUuid;
   }
 
-  public void setUuid(String uuid) {
-    this.uuid = uuid;
+  public void setAnalysisUuid(String analysisUuid) {
+    this.analysisUuid = analysisUuid;
   }
 
   public AnalysisResult resultType(String resultType) {
@@ -83,13 +83,13 @@ public class AnalysisResult   {
       return false;
     }
     AnalysisResult analysisResult = (AnalysisResult) o;
-    return Objects.equals(this.uuid, analysisResult.uuid) &&
+    return Objects.equals(this.analysisUuid, analysisResult.analysisUuid) &&
         Objects.equals(this.resultType, analysisResult.resultType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(uuid, resultType);
+    return Objects.hash(analysisUuid, resultType);
   }
 
   @Override
@@ -97,7 +97,7 @@ public class AnalysisResult   {
     StringBuilder sb = new StringBuilder();
     sb.append("class AnalysisResult {\n");
     
-    sb.append("    uuid: ").append(toIndentedString(uuid)).append("\n");
+    sb.append("    analysisUuid: ").append(toIndentedString(analysisUuid)).append("\n");
     sb.append("    resultType: ").append(toIndentedString(resultType)).append("\n");
     sb.append("}");
     return sb.toString();

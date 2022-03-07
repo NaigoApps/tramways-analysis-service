@@ -1,8 +1,8 @@
 package it.tramways.analysis.rest;
 
-import it.tramways.analysis.core.AnalysisService;
 import it.tramways.analysis.api.v1.AnalysisApi;
 import it.tramways.analysis.api.v1.model.*;
+import it.tramways.analysis.core.AnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -29,16 +29,6 @@ public class AnalysisController implements AnalysisApi {
     private DiscoveryClient discoveryClient;
 
     @Override
-    public ResponseEntity<Void> deleteAnalysis(String projectId, String mapId, String analysisId) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<Analysis> getAnalysis(String projectId, String mapId, String analysisId) {
-        return null;
-    }
-
-    @Override
     public ResponseEntity<List<AnalysisType>> getAvailableAnalysis(@NotNull @Valid String projectId,
                                                                    @NotNull @Valid String mapId) {
         return ResponseEntity.ok(discoveryClient.getServices().stream()
@@ -57,12 +47,28 @@ public class AnalysisController implements AnalysisApi {
     @Override
     public ResponseEntity<List<AnalysisDescription>> getMapAnalysis(String projectId,
                                                                     String mapId) {
-        return null;
+        return ResponseEntity.ok(analysisService.getMapAnalysis(projectId, mapId));
     }
 
     @Override
-    public ResponseEntity<AnalysisResponse> launchAnalysis(@Valid AnalysisRequest analysisRequest) {
-        return null;
+    public ResponseEntity<Analysis> getAnalysis(String analysisId) {
+        return ResponseEntity.ok(analysisService.getAnalysis(analysisId));
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteAnalysis(String analysisId) {
+        analysisService.deleteAnalysis(analysisId);
+        return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public ResponseEntity<AnalysisDescription> launchAnalysis(@Valid AnalysisRequest analysisRequest) {
+        return ResponseEntity.ok(analysisService.requestAnalysis(analysisRequest));
+    }
+
+    @Override
+    public ResponseEntity<Analysis> updateAnalysis(String analysisId, AnalysisUpdateRequest analysisUpdateRequest) {
+        return ResponseEntity.ok(analysisService.updateAnalysisParameters(analysisId, analysisUpdateRequest.getParameters()));
     }
 
     private Predicate<ServiceInstance> isAnalysisService() {

@@ -8,8 +8,8 @@ package it.tramways.analysis.api.v1;
 import it.tramways.analysis.api.v1.model.Analysis;
 import it.tramways.analysis.api.v1.model.AnalysisDescription;
 import it.tramways.analysis.api.v1.model.AnalysisRequest;
-import it.tramways.analysis.api.v1.model.AnalysisResponse;
 import it.tramways.analysis.api.v1.model.AnalysisType;
+import it.tramways.analysis.api.v1.model.AnalysisUpdateRequest;
 import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,16 +24,14 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-17T23:33:43.660141500+01:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-23T18:21:37.178204400+01:00[Europe/Berlin]")
 @Validated
 @Api(value = "analysis", description = "the analysis API")
 public interface AnalysisApi {
 
     /**
-     * DELETE /analysis/{projectId}/{mapId}/{analysisId} : Deletes an analysis
+     * DELETE /analysis/{analysisId} : Deletes an analysis
      *
-     * @param projectId  (required)
-     * @param mapId  (required)
      * @param analysisId  (required)
      * @return Ok (status code 200)
      */
@@ -47,22 +45,16 @@ public interface AnalysisApi {
         @ApiResponse(code = 200, message = "Ok") })
     @RequestMapping(
         method = RequestMethod.DELETE,
-        value = "/analysis/{projectId}/{mapId}/{analysisId}"
+        value = "/analysis/{analysisId}"
     )
-    ResponseEntity<Void> deleteAnalysis(@ApiParam(value = "", required = true) @PathVariable("projectId") String projectId
-
-,@ApiParam(value = "", required = true) @PathVariable("mapId") String mapId
-
-,@ApiParam(value = "", required = true) @PathVariable("analysisId") String analysisId
+    ResponseEntity<Void> deleteAnalysis(@ApiParam(value = "", required = true) @PathVariable("analysisId") String analysisId
 
 );
 
 
     /**
-     * GET /analysis/{projectId}/{mapId}/{analysisId} : Gets an analysis
+     * GET /analysis/{analysisId} : Gets an analysis
      *
-     * @param projectId  (required)
-     * @param mapId  (required)
      * @param analysisId  (required)
      * @return Ok (status code 200)
      */
@@ -76,14 +68,10 @@ public interface AnalysisApi {
         @ApiResponse(code = 200, message = "Ok", response = Analysis.class) })
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/analysis/{projectId}/{mapId}/{analysisId}",
+        value = "/analysis/{analysisId}",
         produces = { "application/json" }
     )
-    ResponseEntity<Analysis> getAnalysis(@ApiParam(value = "", required = true) @PathVariable("projectId") String projectId
-
-,@ApiParam(value = "", required = true) @PathVariable("mapId") String mapId
-
-,@ApiParam(value = "", required = true) @PathVariable("analysisId") String analysisId
+    ResponseEntity<Analysis> getAnalysis(@ApiParam(value = "", required = true) @PathVariable("analysisId") String analysisId
 
 );
 
@@ -149,21 +137,49 @@ public interface AnalysisApi {
      * @return Ok (status code 200)
      */
 
-    @ApiOperation(value = "Launch selected analysis", nickname = "launchAnalysis", notes = "", response = AnalysisResponse.class, authorizations = {
+    @ApiOperation(value = "Launch selected analysis", nickname = "launchAnalysis", notes = "", response = AnalysisDescription.class, authorizations = {
         
         @Authorization(value = "bearerAuth")
          }, tags={ "analysis", })
     @ApiResponses(value = { 
 
-        @ApiResponse(code = 200, message = "Ok", response = AnalysisResponse.class) })
+        @ApiResponse(code = 200, message = "Ok", response = AnalysisDescription.class) })
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/analysis/launch",
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    ResponseEntity<AnalysisResponse> launchAnalysis(
+    ResponseEntity<AnalysisDescription> launchAnalysis(
 
 @ApiParam(value = "" )   @Valid @RequestBody(required = false) AnalysisRequest analysisRequest);
+
+
+    /**
+     * PUT /analysis/{analysisId} : Updates an analysis parameters
+     *
+     * @param analysisId  (required)
+     * @param analysisUpdateRequest  (optional)
+     * @return Ok (status code 200)
+     */
+
+    @ApiOperation(value = "Updates an analysis parameters", nickname = "updateAnalysis", notes = "", response = Analysis.class, authorizations = {
+        
+        @Authorization(value = "bearerAuth")
+         }, tags={ "analysis", })
+    @ApiResponses(value = { 
+
+        @ApiResponse(code = 200, message = "Ok", response = Analysis.class) })
+    @RequestMapping(
+        method = RequestMethod.PUT,
+        value = "/analysis/{analysisId}",
+        produces = { "application/json" },
+        consumes = { "application/json" }
+    )
+    ResponseEntity<Analysis> updateAnalysis(@ApiParam(value = "", required = true) @PathVariable("analysisId") String analysisId
+
+,
+
+@ApiParam(value = "" )   @Valid @RequestBody(required = false) AnalysisUpdateRequest analysisUpdateRequest);
 
 }

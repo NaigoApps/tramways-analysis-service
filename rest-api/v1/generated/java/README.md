@@ -1,8 +1,8 @@
 # analysis-service-client-api
 
 Tramways Analysis API
-- API version: 1.0.3
-  - Build date: 2022-01-17T23:33:48.022355900+01:00[Europe/Berlin]
+- API version: 1.0.7
+  - Build date: 2022-01-23T18:21:41.517640500+01:00[Europe/Berlin]
 
 Tramways Analysis API
 
@@ -40,7 +40,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>it.tramways</groupId>
   <artifactId>analysis-service-client-api</artifactId>
-  <version>1.0.3</version>
+  <version>1.0.7</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -56,7 +56,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "it.tramways:analysis-service-client-api:1.0.3"
+     implementation "it.tramways:analysis-service-client-api:1.0.7"
   }
 ```
 
@@ -70,7 +70,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/analysis-service-client-api-1.0.3.jar`
+* `target/analysis-service-client-api-1.0.7.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -97,11 +97,9 @@ public class Example {
     bearerAuth.setBearerToken("BEARER TOKEN");
 
     AnalysisApi apiInstance = new AnalysisApi(defaultClient);
-    String projectId = "projectId_example"; // String | 
-    String mapId = "mapId_example"; // String | 
     String analysisId = "analysisId_example"; // String | 
     try {
-      apiInstance.deleteAnalysis(projectId, mapId, analysisId);
+      apiInstance.deleteAnalysis(analysisId);
     } catch (ApiException e) {
       System.err.println("Exception when calling AnalysisApi#deleteAnalysis");
       System.err.println("Status code: " + e.getCode());
@@ -120,11 +118,12 @@ All URIs are relative to *http://localhost:8762/tramways/rest*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AnalysisApi* | [**deleteAnalysis**](docs/AnalysisApi.md#deleteAnalysis) | **DELETE** /analysis/{projectId}/{mapId}/{analysisId} | Deletes an analysis
-*AnalysisApi* | [**getAnalysis**](docs/AnalysisApi.md#getAnalysis) | **GET** /analysis/{projectId}/{mapId}/{analysisId} | Gets an analysis
+*AnalysisApi* | [**deleteAnalysis**](docs/AnalysisApi.md#deleteAnalysis) | **DELETE** /analysis/{analysisId} | Deletes an analysis
+*AnalysisApi* | [**getAnalysis**](docs/AnalysisApi.md#getAnalysis) | **GET** /analysis/{analysisId} | Gets an analysis
 *AnalysisApi* | [**getAvailableAnalysis**](docs/AnalysisApi.md#getAvailableAnalysis) | **GET** /analysis/available | Gets available analysis
 *AnalysisApi* | [**getMapAnalysis**](docs/AnalysisApi.md#getMapAnalysis) | **GET** /analysis/{projectId}/{mapId} | Gets project map analysis
 *AnalysisApi* | [**launchAnalysis**](docs/AnalysisApi.md#launchAnalysis) | **POST** /analysis/launch | Launch selected analysis
+*AnalysisApi* | [**updateAnalysis**](docs/AnalysisApi.md#updateAnalysis) | **PUT** /analysis/{analysisId} | Updates an analysis parameters
 
 
 ## Documentation for Models
@@ -136,6 +135,7 @@ Class | Method | HTTP request | Description
  - [AnalysisResult](docs/AnalysisResult.md)
  - [AnalysisStatus](docs/AnalysisStatus.md)
  - [AnalysisType](docs/AnalysisType.md)
+ - [AnalysisUpdateRequest](docs/AnalysisUpdateRequest.md)
  - [ChoiceElement](docs/ChoiceElement.md)
  - [ChoiceProperty](docs/ChoiceProperty.md)
  - [ChoicePropertyAllOf](docs/ChoicePropertyAllOf.md)

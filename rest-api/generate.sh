@@ -30,3 +30,7 @@ openapi-generator-cli generate \
 -o ./"$1"/generated/javascript \
 --api-package it.tramways.analysis.api."$1" \
 --model-package it.tramways.analysis.api."$1".model
+
+cd ./"$1"/generated/javascript
+npm install
+npm publish

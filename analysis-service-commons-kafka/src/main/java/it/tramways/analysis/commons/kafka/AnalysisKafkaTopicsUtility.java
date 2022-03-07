@@ -7,7 +7,7 @@ public class AnalysisKafkaTopicsUtility {
     }
 
     public static String getAnalysisLaunchTopic(String analysisService) {
-        return AnalysisKafkaTopics.ANALYSIS_LAUNCH + "-" + analysisService;
+        return AnalysisKafkaTopics.ANALYSIS_LAUNCH + "-" + analysisService.toLowerCase();
     }
 
     public static String getAnalysisStatusTopic() {

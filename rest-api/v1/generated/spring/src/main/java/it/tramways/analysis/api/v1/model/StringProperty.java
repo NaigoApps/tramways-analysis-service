@@ -19,7 +19,7 @@ import java.util.*;
 /**
  * StringProperty
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-17T23:33:43.660141500+01:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-23T18:21:37.178204400+01:00[Europe/Berlin]")
 public class StringProperty extends Property  {
   @JsonProperty("value")
   private String value;

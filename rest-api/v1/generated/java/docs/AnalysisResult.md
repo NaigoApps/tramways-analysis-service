@@ -7,7 +7,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uuid** | **String** |  |  [optional]
+**analysisUuid** | **String** |  |  [optional]
 **resultType** | **String** |  |  [optional]
 
 

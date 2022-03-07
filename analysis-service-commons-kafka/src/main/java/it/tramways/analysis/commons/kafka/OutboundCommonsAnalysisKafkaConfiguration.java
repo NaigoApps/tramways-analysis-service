@@ -1,13 +1,12 @@
 package it.tramways.analysis.commons.kafka;
 
-import it.tramways.analysis.api.v1.model.AnalysisResult;
-import it.tramways.analysis.api.v1.model.AnalysisStatus;
+import it.tramways.analysis.commons.kafka.templates.AnalysisResultTemplate;
+import it.tramways.analysis.commons.kafka.templates.AnalysisStatusTemplate;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.IntegerSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import java.util.HashMap;
@@ -17,15 +16,13 @@ import java.util.Map;
 public class OutboundCommonsAnalysisKafkaConfiguration {
 
     @Bean
-    public KafkaTemplate<Integer, AnalysisResult> analysisResultTemplate() {
-        KafkaTemplate<Integer, AnalysisResult> result = new KafkaTemplate<>(createProducerFactory());
-        result.setDefaultTopic(AnalysisKafkaTopicsUtility.getAnalysisResultTopic());
-        return result;
+    public AnalysisResultTemplate analysisResultTemplate() {
+        return new AnalysisResultTemplate(createProducerFactory());
     }
 
     @Bean
-    public KafkaTemplate<Integer, AnalysisStatus> analysisStatusTemplate() {
-        KafkaTemplate<Integer, AnalysisStatus> result = new KafkaTemplate<>(createProducerFactory());
+    public AnalysisStatusTemplate analysisStatusTemplate() {
+        AnalysisStatusTemplate result = new AnalysisStatusTemplate(createProducerFactory());
         result.setDefaultTopic(AnalysisKafkaTopicsUtility.getAnalysisStatusTopic());
         return result;
     }
@@ -36,7 +33,7 @@ public class OutboundCommonsAnalysisKafkaConfiguration {
 
     private Map<String, Object> defaultProps() {
         Map<String, Object> props = new HashMap<>();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "http://192.168.1.249:9092");
         return props;
     }
 

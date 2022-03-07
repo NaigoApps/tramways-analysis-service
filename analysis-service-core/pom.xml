@@ -4,22 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <groupId>org.springframework.boot</groupId>
-        <relativePath/>
-        <version>2.3.3.RELEASE</version>
+        <artifactId>analysis-service</artifactId>
+        <groupId>it.tramways</groupId>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>it.tramways</groupId>
-    <version>1.0.0-SNAPSHOT</version>
     <artifactId>analysis-service-core</artifactId>
-
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -29,13 +21,13 @@
         <dependency>
             <groupId>it.tramways</groupId>
             <artifactId>analysis-service-outbound-api</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>it.tramways</groupId>
             <artifactId>analysis-service-server-api</artifactId>
-            <version>1.0.3</version>
+            <version>${rest.api.version}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

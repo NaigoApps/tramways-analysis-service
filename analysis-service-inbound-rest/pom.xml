@@ -22,44 +22,23 @@
         <dependency>
             <groupId>it.tramways</groupId>
             <artifactId>analysis-service-server-api</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${rest.api.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>it.tramways</groupId>
             <artifactId>analysis-service-core</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <groupId>org.springframework.cloud</groupId>
-                <scope>import</scope>
-                <type>pom</type>
-                <version>${spring-cloud.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-    <groupId>it.tramways</groupId>
 
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <groupId>org.springframework.boot</groupId>
-        <relativePath/>
-        <version>2.3.3.RELEASE</version>
+        <artifactId>analysis-service</artifactId>
+        <groupId>it.tramways</groupId>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <spring-cloud.version>Hoxton.SR7</spring-cloud.version>
-    </properties>
-
-    <version>1.0.0-SNAPSHOT</version>
 
 </project>

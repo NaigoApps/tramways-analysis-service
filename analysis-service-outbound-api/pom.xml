@@ -11,16 +11,11 @@
 
     <artifactId>analysis-service-outbound-api</artifactId>
 
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>it.tramways</groupId>
             <artifactId>analysis-service-server-api</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${rest.api.version}</version>
         </dependency>
     </dependencies>
 
